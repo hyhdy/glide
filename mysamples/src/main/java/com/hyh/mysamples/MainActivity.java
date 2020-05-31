@@ -21,10 +21,11 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void loadGif(View view){
-        Glide.with(this).load(R.drawable.animated_flag_france)
-                //.override(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL)
+        Glide.with(this).load(R.drawable.big)
+                .override(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL)
                 //.override(278,183)
-                .override(2224,1464)
+                //.override(2224,1464)
+                .override(1000,1000)
                 .into(mImageView);
     }
 }

@@ -118,6 +118,7 @@ public class StandardGifDecoder implements GifDecoder {
   private Boolean isFirstFrameTransparent;
   @NonNull
   private Bitmap.Config bitmapConfig = Config.ARGB_8888;
+  private long mStartTime;
 
   // Public API.
   @SuppressWarnings("unused")
@@ -231,6 +232,8 @@ public class StandardGifDecoder implements GifDecoder {
   @Nullable
   @Override
   public synchronized Bitmap getNextFrame() {
+    mStartTime = System.currentTimeMillis();
+
     if (header.frameCount <= 0 || framePointer < 0) {
       if (Log.isLoggable(TAG, Log.DEBUG)) {
         Log.d(TAG, "Unable to decode frame"
@@ -494,6 +497,7 @@ public class StandardGifDecoder implements GifDecoder {
     // Set pixels for current image.
     Bitmap result = getNextBitmap();
     result.setPixels(dest, 0, downsampledWidth, 0, 0, downsampledWidth, downsampledHeight);
+    Log.d("hyh", "StandardGifDecoder: setPixels: consume="+(System.currentTimeMillis()-mStartTime));
     return result;
   }
 
