@@ -539,6 +539,7 @@ class DecodeJob<R> implements DataFetcherGenerator.FetcherReadyCallback,
   @NonNull
   <Z> Resource<Z> onResourceDecoded(DataSource dataSource,
       @NonNull Resource<Z> decoded) {
+    long startTime = System.currentTimeMillis();
     @SuppressWarnings("unchecked")
     Class<Z> resourceSubClass = (Class<Z>) decoded.get().getClass();
     Transformation<Z> appliedTransformation = null;
@@ -594,6 +595,7 @@ class DecodeJob<R> implements DataFetcherGenerator.FetcherReadyCallback,
       deferredEncodeManager.init(key, encoder, lockedResult);
       result = lockedResult;
     }
+    Log.d("hyh", "DecodeJob: onResourceDecoded: consume="+(System.currentTimeMillis()-startTime));
     return result;
   }
 
